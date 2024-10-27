@@ -13,8 +13,8 @@ use windows::Win32::{
             GetAsyncKeyState, GetKeyState, MapVirtualKeyW, SendInput, INPUT, INPUT_0,
             INPUT_KEYBOARD, INPUT_MOUSE, KEYBDINPUT, KEYBD_EVENT_FLAGS, KEYEVENTF_KEYUP,
             KEYEVENTF_SCANCODE, MAP_VIRTUAL_KEY_TYPE, MOUSEEVENTF_HWHEEL, MOUSEEVENTF_LEFTDOWN,
-            MOUSEEVENTF_LEFTUP, MOUSEEVENTF_MIDDLEDOWN, MOUSEEVENTF_MIDDLEUP,
-            MOUSEEVENTF_RIGHTDOWN, MOUSEEVENTF_RIGHTUP, MOUSEEVENTF_WHEEL, MOUSEINPUT,
+            MOUSEEVENTF_LEFTUP, MOUSEEVENTF_MIDDLEDOWN, MOUSEEVENTF_MIDDLEUP, MOUSEEVENTF_XUP,
+            MOUSEEVENTF_RIGHTDOWN, MOUSEEVENTF_RIGHTUP, MOUSEEVENTF_XDOWN,  MOUSEEVENTF_WHEEL, MOUSEINPUT,
             MOUSE_EVENT_FLAGS, VIRTUAL_KEY,
         },
         WindowsAndMessaging::{
@@ -70,6 +70,8 @@ impl MouseButton {
             MouseButton::LeftButton => send_mouse_input(MOUSEEVENTF_LEFTDOWN, 0, 0, 0),
             MouseButton::RightButton => send_mouse_input(MOUSEEVENTF_RIGHTDOWN, 0, 0, 0),
             MouseButton::MiddleButton => send_mouse_input(MOUSEEVENTF_MIDDLEDOWN, 0, 0, 0),
+            MouseButton::X1Button => send_mouse_input(MOUSEEVENTF_XDOWN, 0x0001, 0, 0),
+            MouseButton::X2Button => send_mouse_input(MOUSEEVENTF_XDOWN, 0x0002, 0, 0),
             _ => {}
         }
     }
@@ -80,6 +82,8 @@ impl MouseButton {
             MouseButton::LeftButton => send_mouse_input(MOUSEEVENTF_LEFTUP, 0, 0, 0),
             MouseButton::RightButton => send_mouse_input(MOUSEEVENTF_RIGHTUP, 0, 0, 0),
             MouseButton::MiddleButton => send_mouse_input(MOUSEEVENTF_MIDDLEUP, 0, 0, 0),
+            MouseButton::X1Button => send_mouse_input(MOUSEEVENTF_XUP, 0x0001, 0, 0),
+            MouseButton::X2Button => send_mouse_input(MOUSEEVENTF_XUP, 0x0002, 0, 0),
             _ => {}
         }
     }
